@@ -1,6 +1,6 @@
 <template>
      <h1>Create an account</h1>   
-<form>
+<form @submit.prevent="loginFunction">
     <label for="userName">Username</label><br>
     <input type="text" id="userName" name="userName"><br><br>
     <label for="password" id="password" name="password">Password</label><br>
@@ -12,4 +12,10 @@
 </template>
 
 <script>
+export default{
+    methods:{
+ loginFunction() {
+    this.$router.push("/");
+}}
+}
 </script>
