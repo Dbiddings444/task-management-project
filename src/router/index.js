@@ -9,12 +9,12 @@ import TaskDetailsPage from '../views/TaskDetailsPage.vue';
 import CreateTaskPage from '../views/CreateTaskPage.vue';
 // Define routes
 const routes = [
-  { path: '/register', component: Register },  // About route
-  { path: '/Dashboard', component: Dashboard },  // About route
-  { path: '/ProjectBoard', component: ProjectBoard },  // About route
-  { path: '/TaskDetails', component: TaskDetailsPage },  // About route
-  { path: '/CreateTask', component: CreateTaskPage },  // About route
-  { path: '/', component: Login },  // Login route
+  { path: '/Register', component: Register },  
+  { path: '/Dashboard', component: Dashboard },  
+  { path: '/ProjectBoard', component: ProjectBoard },  
+  { path: '/TaskDetails', component: TaskDetailsPage },  
+  { path: '/CreateTask', component: CreateTaskPage },  
+  { path: '/Login', component: Login },  
 ];
 
 // Create the router

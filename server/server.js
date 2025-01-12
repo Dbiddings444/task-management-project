@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
+const path = require('path');
 const bodyParser = require('body-parser'); // Use require for body-parser
 
 dotenv.config({ path: '.env' });
@@ -16,6 +17,12 @@ app.use(express.json());
 // app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'../public', 'index.html'));
+});
 
 // Connect to MongoDB
 mongoose.connect(process.env.DATABASE_URL)
