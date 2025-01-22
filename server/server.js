@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 const path = require('path');
 const bodyParser = require('body-parser'); // Use require for body-parser
 
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 
 // Use the authentication routes
 app.use('/', userRoutes);
+app.use('/', taskRoutes);
 
 // Start the server
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -40,20 +40,20 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res) => {
 	try {
-		const { email, password } = req.body;
-		if (!email || !password) {
-			return res.status(400).json({ message: 'Email and password are required' });
+		const { username, password } = req.body;
+		if (!username || !password) {
+			return res.status(400).json({ message: 'username and password are required' });
 		}
 
-		const user = await User.findOne({ email });
+		const user = await User.findOne({ username });
 		if (!user) {
-			return res.status(404).json({ message: 'Email not found' });
+			return res.status(404).json({ message: 'username not found' });
 		}
 
 		const matches = await bcrypt.compare(password, user.password);
 		if (matches) {
-			const signedToken = jwt.sign({ email, userId: user._id.toString() }, jwtSecret, { expiresIn: '1h' });
-			res.send({ token: signedToken, userId: user._id.toString() });
+			const signedToken = jwt.sign({ username, userId: user._id.toString() }, jwtSecret, { expiresIn: '1h' });
+			res.send({ token: signedToken, userId: user._id.toString()});
 			console.log('userId',user._id.toString());
 		} else {
 			res.status(401).json({ message: 'Incorrect password' });

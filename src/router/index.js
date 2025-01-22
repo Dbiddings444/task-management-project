@@ -14,7 +14,7 @@ const routes = [
   { path: '/ProjectBoard', component: ProjectBoard },  
   { path: '/TaskDetails', component: TaskDetailsPage },  
   { path: '/CreateTask', component: CreateTaskPage },  
-  { path: '/Login', component: Login },  
+  { path: '/', component: Login },  
 ];
 
 // Create the router
