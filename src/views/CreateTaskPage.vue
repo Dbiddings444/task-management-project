@@ -17,6 +17,8 @@
     </form>
 </template>
 <script>
+import { apiRequest } from '@/utils/apiHelpers';
+
 export default {
     methods: {
         createTask() {
@@ -27,19 +29,8 @@ export default {
                 reporter: this.reporter,
                 assignee: this.assignee
             }
-            const options = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(obj)
-            };
-            fetch('http://localhost:3000/api/auth/createTask', options)
-                .then(async response => {
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.message);
-                    }
-                    return response.json()
-                })
+            const token = localStorage.getItem('token');
+            apiRequest('http://localhost:3000/api/auth/createTask', 'POST', obj, token)
                 .then((data) => {
                     alert(data.message);
                     this.$router.push("/ProjectBoard");

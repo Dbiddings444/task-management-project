@@ -1,6 +1,6 @@
 <template>
     <h1>Login to your account</h1>
-    <form  @submit.prevent="loginFunction">
+    <form @submit.prevent="loginFunction">
         <label for="userName">Username</label><br>
         <input type="text" id="userName" name="userName" v-model="userName"><br><br>
         <label for="password" id="password" name="password">Password</label><br>
@@ -12,27 +12,33 @@
 </template>
 
 <script>
-export default{
-    methods:{
+import { apiRequest } from '@/utils/apiHelpers';
+
+export default {
+    methods: {
         loginFunction() {
+
             if (!this.userName || !this.password) {
                 alert("All fields are required")
                 return;
             }
             let obj = { username: this.userName, password: this.password }
-            const options = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(obj)
-            };
-            fetch('http://localhost:3000/api/auth/login', options)
-                .then(async response => {
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.message || 'Login failed');
-                    }
-                    return response.json()
-                })
+            // const options = {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(obj)
+            // };
+            // fetch('http://localhost:3000/api/auth/login', options)
+            //     .then(async response => {
+            //         if (!response.ok) {
+            //             const errorData = await response.json();
+            //             throw new Error(errorData.message || 'Login failed');
+            //         }
+            //         return response.json()
+            //     })
+            const token = localStorage.getItem('token');
+            console.log(token);
+            apiRequest('http://localhost:3000/api/auth/login', 'POST', obj,)
                 .then((data) => {
                     alert("Login successful")
                     console.log('User Token:', data.token);

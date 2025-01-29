@@ -4,7 +4,7 @@ const taskController = require('../controllers/taskController');
 const authorize = require('../middleWare/authorize');
 
 
-router.post('/api/auth/createTask', taskController.createTask);
+router.post('/api/auth/createTask', authorize.verify, taskController.createTask);
 
 
 
