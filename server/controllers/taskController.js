@@ -20,3 +20,20 @@ exports.createTask = async (req, res) => {
     res.status(400).json({ message: 'Error during task creation' });
   }
 };
+
+exports.getAllTask = async (req, res) => {
+  try {
+    const tasks = await Task.find(); //issue is being caused here
+    console.log("task from DB/ you reached this far!!!: ",tasks);
+
+    const groupedTasks = {
+      toDo: tasks.filter((task) => task.status === "To Do"),
+      inProgress: tasks.filter((task) => task.status === "In Progress"),
+      completed: tasks.filter((task) => task.status === "Completed"),
+    };
+    res.status(200).json(groupedTasks);
+  }
+  catch{
+    res.status(500).json({ message: "Database error!" });
+  }
+}

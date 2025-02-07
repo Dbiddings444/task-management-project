@@ -23,24 +23,10 @@ export default {
                 return;
             }
             let obj = { username: this.userName, password: this.password }
-            // const options = {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(obj)
-            // };
-            // fetch('http://localhost:3000/api/auth/login', options)
-            //     .then(async response => {
-            //         if (!response.ok) {
-            //             const errorData = await response.json();
-            //             throw new Error(errorData.message || 'Login failed');
-            //         }
-            //         return response.json()
-            //     })
             const token = localStorage.getItem('token');
             console.log(token);
             apiRequest('http://localhost:3000/api/auth/login', 'POST', obj,)
                 .then((data) => {
-                    alert("Login successful")
                     console.log('User Token:', data.token);
                     localStorage.setItem('token', data.token);
                     this.$router.push("/DashBoard");

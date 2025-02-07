@@ -1,9 +1,4 @@
-export async function apiRequest(
-  url,
-  method = "GET",
-  data = null,
-  token = null
-) {
+export async function apiRequest( url, method = "GET", data = null,token = null) { 
   try {
     const headers = { "Content-Type": "application/json" };
 

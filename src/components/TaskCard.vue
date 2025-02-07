@@ -4,7 +4,10 @@
         <slot name="header">{{title}}</slot>
       </div>
       <div class="card-body">
-        <slot>Default Card Content</slot>
+        <slot>{{ summary }}</slot>
+      </div>
+      <div class="card-footer">
+        <slot>{{ assignee }}</slot>
       </div>
     </div>
   </template>
@@ -13,8 +16,19 @@
   export default {
     name: "TaskCard",
     props:{
-        title: String, // Prop title accepts a string
+      summary: {
+      type: String, // The expected type of the prop
+      required: true, // This prop must be provided
     },
+    reporter: {
+      type: String,
+      default: "Unknown Reporter", // Default value if the prop is not provided
+    },
+    assignee: {
+      type: String,
+      default: "Unassigned",
+    },
+  },
 methods:{
    redirect() {
     this.$router.push("/TaskDetails");
